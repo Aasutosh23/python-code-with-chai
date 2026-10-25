@@ -26,6 +26,7 @@
   - [10. SQLite3 Database Integration](#10-sqlite3-database-integration)
   - [11. Handling Web APIs](#11-handling-web-apis)
   - [12. MongoDB Integration](#12-mongodb-integration)
+  - [13. Virtual Environments & Package Isolation](#13-virtual-environments--package-isolation)
 - [Featured Project: YouTube Video Manager Evolution](#-featured-project-youtube-video-manager-evolution)
 - [Getting Started](#-getting-started)
   - [Prerequisites](#prerequisites)
@@ -46,6 +47,7 @@ This repository documents an end-to-end Python mastery path starting from core p
 3. **Advanced Programming Paradigms**: Functional patterns, closures, generators, decorators, and OOP.
 4. **Data Persistence & Backends**: File handling (JSON), Relational DBs (SQLite3), and NoSQL DBs (MongoDB Atlas).
 5. **Networking**: Consuming public RESTful endpoints with the `requests` ecosystem.
+6. **Environment & Dependency Management**: Virtual environment isolation (`venv`), reproducible dependency manifests (`requirements.txt`), and clean package scoping.
 
 ---
 
@@ -66,7 +68,9 @@ python-code-with-chai/
 ├── 10_database_sqlite3/     # SQLite3 integration with parameterized queries (DB Manager)
 ├── 11_handling_apis/        # HTTP REST API consumption using requests
 ├── 12_python_mongodb/       # PyMongo, MongoDB Atlas connection & CRUD operations
+├── 13_virtual_py/           # Python virtual environments (venv), pip freeze & package isolation
 ├── .gitignore               # Ignored cache, virtual environments, and secrets
+├── requirements.txt         # Root project dependencies
 └── README.md                # Project documentation
 ```
 
@@ -180,6 +184,17 @@ python-code-with-chai/
   - Working with `ObjectId` for document indexing and queries.
   - Full CRUD operations (`insert_one`, `find`, `update_one`, `delete_one`).
 
+### 13. Virtual Environments & Package Isolation
+
+- **Location**: [`13_virtual_py/`](./13_virtual_py/)
+- **Concepts**: Virtual environment architecture, dependency isolation, and reproducible Python environments.
+- **Highlights**:
+  - Why virtual environments matter: avoiding global site-package pollution and managing conflicting package versions (e.g., Django, PyMongo).
+  - Creating and activating virtual environments (`python -m venv .venv`).
+  - Cross-platform activation scripts (`Activate.ps1`, `activate.bat`, `source bin/activate`).
+  - Inspecting and exporting environments: `pip list` vs. `pip freeze > requirements.txt`.
+  - Clean project reproducibility with `pip install -r requirements.txt`.
+
 ---
 
 ## 📽 Featured Project: YouTube Video Manager Evolution
@@ -217,16 +232,22 @@ graph LR
    ```
 
 2. **Create and activate a virtual environment** _(recommended)_:
-   - **Windows**:
+   - **Windows (PowerShell)**:
      ```powershell
-     python -m venv venv
-     .\venv\Scripts\activate
+     python -m venv .venv
+     .\.venv\Scripts\Activate.ps1
+     ```
+   - **Windows (Command Prompt)**:
+     ```cmd
+     python -m venv .venv
+     .\.venv\Scripts\activate.bat
      ```
    - **macOS / Linux**:
      ```bash
-     python3 -m venv venv
-     source venv/bin/activate
+     python3 -m venv .venv
+     source .venv/bin/activate
      ```
+
 3. **Install external dependencies**:
    ```bash
    pip install -r requirements.txt
@@ -247,8 +268,14 @@ python 03_loops/01_solution.py
 # Run OOP demonstration
 python 07_oop/01_solution.py
 
-# Run YouTube Manager (SQLite Version)
+# Run YouTube Manager - Stage 1 (JSON File Storage)
+python 09_error_handling/youtube_manager.py
+
+# Run YouTube Manager - Stage 2 (SQLite Relational DB)
 python 10_database_sqlite3/youtube_manager_db.py
+
+# Run YouTube Manager - Stage 3 (MongoDB Atlas NoSQL DB)
+python 12_python_mongodb/youtube_manager_mongodb.py
 
 # Run API handler
 python 11_handling_apis/freeapi_username.py
